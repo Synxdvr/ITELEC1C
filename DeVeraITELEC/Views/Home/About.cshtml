@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "About";
+}
+
+<div class="header-container">
+    <div class="hdr-container-left">
+        <h1>Steve De Vera</h1>
+        <h3>3rd Year IT Student &commat; UST</h3>
+        <p>
+            A 20-year-old <strong>Full Stack Developer</strong> at ByteVerse with
+            <strong>21 years</strong> of coding experience.
+        </p>
+        <a href="mailto:steve.devera.cics@ust.edu.ph" class="btn">Schedule a Meeting</a>
+    </div>
+    <div class="hdr-container-right">
+        <img src="/avatar.jpg" alt="Avatar">
+    </div>
+</div>
+
+<style>
+
+    body {
+        font-family: 'Inter', sans-serif;
+    }
+
+    h1:hover {
+        color: #262fdc;
+        cursor: none;
+    }
+
+    .header-container {
+        display: flex;
+        column-gap: 7.5rem;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column-reverse;
+        margin-top: 2.5rem;
+        padding: 0 5rem;
+        gap: 2.5rem;
+    }
+
+    .hdr-container-right img {
+        height: 275px;
+        border-radius: 50%;
+        box-shadow: rgba(136, 165 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    }
+
+    .btn:link:hover, .btn:visited:hover {
+        background-color: #181e8f;
+    }
+
+    .btn:link, .btn:visited {
+        font-size: 16px;
+        font-weight: 600;
+        background-color: #2b36f4;
+        color: #f6f6f6;
+        text-decoration: none;
+        padding: 1rem 2rem;
+        border-radius: 9px;
+    }
+</style>
