@@ -26,6 +26,10 @@ namespace DeVeraITELEC.Controllers
             
             return View(StudentList);
         }
+        public IActionResult Student()
+        {
+            return View();
+        }
 
         public IActionResult ShowDetail(int id)
         {

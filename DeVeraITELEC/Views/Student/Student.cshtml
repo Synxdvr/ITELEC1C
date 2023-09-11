@@ -14,10 +14,10 @@
     string FullName = (FirstName + " " + LastName);
     bool IsTenured = true;
     string Status = "";
-    int SalaryPerHour = 11;
-    int SalaryPerDay = 0;
-    int SalaryPerMonth = 0;
-    var PrelimGrade = 90;
+    var SalaryPerHour = 11.00F;
+    var SalaryPerDay = 0.00F;
+    var SalaryPerMonth = 0.00F;
+    var PrelimGrade = 92;
     var FinalGrade = 90;
     var SemGrade = (PrelimGrade + FinalGrade) / 2;
     float TransGrade = 0.00F;
@@ -26,7 +26,7 @@
     if (IsTenured == true)
     {
         SalaryPerDay = SalaryPerHour * 8;
-        SalaryPerMonth = SalaryPerDay * 30 + 500;
+        SalaryPerMonth = SalaryPerDay * 30 + 500.00F;
         Status = "Permanent";
     }
     else if (IsTenured == false)

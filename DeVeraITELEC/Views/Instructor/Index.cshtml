@@ -1,18 +1,14 @@
 ﻿@model IEnumerable<Instructor>;
 
-<div>Instructors</div>
-
 
 <table class="table table-dark">
 
     <tr>
-        <th colspan="7">Instructor</th>
+        <th colspan="5">Instructor</th>
     </tr>
 
     <tr>
-        <td>Id</td>
-        <td>Fist Name</td>
-        <td>Last Name</td>
+        <td>Name</td>
         <td>Status</td>
         <td>Rank</td>
         <td>Hiring Date</td>
@@ -23,21 +19,10 @@
     @foreach (var instructor in Model)
     {
         <tr>
-            <td>@instructor.Id</td>
-            <td>@instructor.FirstName</td>
-            <td>@instructor.LastName</td>
-            @{
-                if (@instructor.IsTenured == true)
-            {
-                <td>Permanent</td>
-            }
-            else
-            {
-                <td>Provisionary</td>
-            }
-            }
+            <td>@instructor.FirstName @instructor.LastName</td>
+            <td>@instructor.IsTenured</td>
             <td>@instructor.Rank</td>
-            <td>@instructor.HiringDate</td>
+            <td>@instructor.HiringDate.ToString("d")</td>
             <td><a asp-action="ShowDetail" asp-route-id="@instructor.Id">Show Details</a></td>
 
         </tr>
