@@ -10,15 +10,30 @@ namespace DeVeraITELEC.Controllers
             {
                 new Instructor()
                 {
-                    Id= 1,FirstName = "Gabriel",LastName = "Montano",IsTenured = true, Rank = Rank.Professor, HiringDate = DateTime.Parse("2022-08-26")
+                    Id= 1,
+                    FirstName = "Gabriel",
+                    LastName = "Montano",
+                    IsTenured = true, 
+                    Rank = Rank.Professor, 
+                    HiringDate = DateTime.Parse("2022-08-26")
                 },
                 new Instructor()
                 {
-                    Id= 2,FirstName = "Zyx",LastName = "Montano", IsTenured = false, Rank = Rank.Instructor, HiringDate = DateTime.Parse("2022-08-07")
+                    Id= 2,
+                    FirstName = "Zyx",
+                    LastName = "Montano", 
+                    IsTenured = false, 
+                    Rank = Rank.Instructor, 
+                    HiringDate = DateTime.Parse("2022-08-07")
                 },
                 new Instructor()
                 {
-                    Id= 3,FirstName = "Aerdriel",LastName = "Montano", IsTenured = true, Rank = Rank.Professor, HiringDate = DateTime.Parse("2020-01-25")
+                    Id= 3,
+                    FirstName = "Aerdriel",
+                    LastName = "Montano", 
+                    IsTenured = true, 
+                    Rank = Rank.Professor, 
+                    HiringDate = DateTime.Parse("2020-01-25")
                 }
 
                 

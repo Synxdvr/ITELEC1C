@@ -9,23 +9,11 @@
     string Week = Date.ToString("dddd");
     int Day = Date.Day;
     int Year = Date.Year;
-    string Message = "";
-
-    if (Time >= 5 && Time < 12)
-    {
-        Message = "Good morning!";
-    }
-    else if (Time >= 12 && Time < 18)
-    {
-        Message = "Good afternoon!";
-    }
-    else
-    {
-        Message = "Good evening!";
-    }
+    string Message = (Time >= 5 && Time < 12) ? "Good morning!" : (Time >= 12 && Time < 18) ? "Good afternoon!" : "Good evening!";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome to my Page!!!</h1>
     <p>@Message Today is @Week of @Month @Day, @Year.</p>
 </div>
+

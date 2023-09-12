@@ -2,92 +2,40 @@
     ViewData["Title"] = "Student";
 }
 
+<link rel="stylesheet" href="/css/student.css" asp-append-version="true" />
+
 @{
     string FirstName = "Steve";
     string LastName = "De Vera";
     DateTime Birthday = DateTime.Parse("01/30/2003");
-    DateTime Date = DateTime.Now;
-    int Age = Date.Year - Birthday.Year;
+    int Age = DateTime.Now.Year - Birthday.Year;
     string Email = "steve.devera.cics@ust.edu.ph";
     string Username = Email.Split('@')[0];
     string Domain = Email.Split('@')[1];
-    string FullName = (FirstName + " " + LastName);
+    string FullName = $"{FirstName} {LastName}";
     bool IsTenured = true;
-    string Status = "";
     var SalaryPerHour = 11.00F;
-    var SalaryPerDay = 0.00F;
-    var SalaryPerMonth = 0.00F;
+    var SalaryPerDay = SalaryPerHour * 8;
+    var SalaryPerMonth = SalaryPerDay * 30 + (IsTenured ? 500.00F : 0.00F);
     var PrelimGrade = 92;
     var FinalGrade = 90;
     var SemGrade = (PrelimGrade + FinalGrade) / 2;
-    float TransGrade = 0.00F;
-    string Remarks = "";
-
-    if (IsTenured == true)
+    var TransGrade = SemGrade switch
     {
-        SalaryPerDay = SalaryPerHour * 8;
-        SalaryPerMonth = SalaryPerDay * 30 + 500.00F;
-        Status = "Permanent";
-    }
-    else if (IsTenured == false)
-    {
-        SalaryPerDay = SalaryPerHour * 8;
-        SalaryPerMonth = SalaryPerDay * 30;
-        Status = "Probationary";
-    }
-
-    if (SemGrade >= 96)
-    {
-        TransGrade = 1.00F;
-        Remarks = "PASSED!!";
-    }
-    else if (SemGrade >= 94)
-    {
-        TransGrade = 1.25F;
-        Remarks = "PASSED!!";
-    }
-    else if (SemGrade >= 92)
-    {
-        TransGrade = 1.50F;
-        Remarks = "PASSED!!";
-    }
-    else if (SemGrade >= 89)
-    {
-        TransGrade = 1.75F;
-        Remarks = "PASSED!!";
-    }
-    else if (SemGrade >= 87)
-    {
-        TransGrade = 2.00F;
-        Remarks = "PASSED!!";
-    }
-    else if (SemGrade >= 84)
-    {
-        TransGrade = 2.25F;
-        Remarks = "PASSED!!";
-    }
-    else if (SemGrade >= 82)
-    {
-        TransGrade = 2.50F;
-        Remarks = "PASSED!!";
-    }
-    else if (SemGrade >= 79)
-    {
-        TransGrade = 2.75F;
-        Remarks = "PASSED!!";
-    }
-    else if (SemGrade >= 75)
-    {
-        TransGrade = 3.00F;
-        Remarks = "PASSED!!";
-    }
-    else
-    {
-        TransGrade = 5.00F;
-        Remarks = "FAILED!!";
-    }
-
+        >= 96 => 1.00F,
+        >= 94 => 1.25F,
+        >= 92 => 1.50F,
+        >= 89 => 1.75F,
+        >= 87 => 2.00F,
+        >= 84 => 2.25F,
+        >= 82 => 2.50F,
+        >= 79 => 2.75F,
+        >= 75 => 3.00F,
+        _ => 5.00F
+    };
+    var Remarks = TransGrade <= 3.00F ? "PASSED!!" : "FAILED!!";
 }
+
 
 <div class="text-center">
     <h1 class="display-4">Machine Problem 1</h1>
@@ -101,7 +49,7 @@
     <div class="result">
         <p><b>Name: </b> @FullName</p>
         <p><b>Email: </b> @Email</p>
-        <p><b>Status: </b> @Status</p>
+        <p><b>Status: </b> @(IsTenured ? "Permanent" : "Probitionary")</p>
         <p><b>Daily Salary: </b> $@SalaryPerDay</p>
         <p><b>Monthly Salary: </b> $@SalaryPerMonth</p>
     </div>
@@ -116,51 +64,3 @@
     </div>
 
 </div>
-
-<style>
-    body{
-        background: #121212;
-    }
-
-    h1, h5, p{
-        color: white;
-    }
-
-    button {
-        background: #FBCA1F;
-        font-family: inherit;
-        padding: 0.6em 1.3em;
-        font-weight: 900;
-        font-size: 18px;
-        border: 3px solid black;
-        border-radius: 0.4em;
-        box-shadow: 0.1em 0.1em;
-    }
-
-    .result {
-        position: absolute;
-        top: 50%;
-        left: 25%;
-        width: 400px;
-        padding: 40px;
-        transform: translate(-50%, -50%);
-        background: rgba(24, 20, 20, 0.987);
-        box-sizing: border-box;
-        box-shadow: 0 15px 25px rgba(0,0,0,.6);
-        border-radius: 10px;
-    }
-
-    .grades {
-        position: absolute;
-        top: 50%;
-        left: 75%;
-        width: 400px;
-        padding: 40px;
-        transform: translate(-50%, -50%);
-        background: rgba(24, 20, 20, 0.987);
-        box-sizing: border-box;
-        box-shadow: 0 15px 25px rgba(0,0,0,.6);
-        border-radius: 10px;
-    }
-
-</style>

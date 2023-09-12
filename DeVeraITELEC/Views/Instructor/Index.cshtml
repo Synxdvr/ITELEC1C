@@ -1,30 +1,29 @@
 ﻿@model IEnumerable<Instructor>;
 
 
-<table class="table table-dark">
-
-    <tr>
-        <th colspan="5">Instructor</th>
-    </tr>
-
-    <tr>
-        <td>Name</td>
-        <td>Status</td>
-        <td>Rank</td>
-        <td>Hiring Date</td>
-        <td>Details</td>
-
-
-    </tr>
-    @foreach (var instructor in Model)
-    {
+<table class="table table-dark table-striped">
+    <thead>
         <tr>
-            <td>@instructor.FirstName @instructor.LastName</td>
-            <td>@instructor.IsTenured</td>
-            <td>@instructor.Rank</td>
-            <td>@instructor.HiringDate.ToString("d")</td>
-            <td><a asp-action="ShowDetail" asp-route-id="@instructor.Id">Show Details</a></td>
-
+            <th class="text-center" colspan="5">Instructor</th>
         </tr>
-    }
+        <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Rank</th>
+            <th>Hiring Date</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var instructor in Model)
+        {
+            <tr>
+                <td>@($"{instructor.FirstName} {instructor.LastName}")</td>
+                <td>@(instructor.IsTenured ? "Permanent" : "Probationary")</td>
+                <td>@instructor.Rank</td>
+                <td>@instructor.HiringDate.ToString("d")</td>
+                <td><a asp-action="ShowDetail" asp-route-id="@instructor.Id">Show Details</a></td>
+            </tr>
+        }
+    </tbody>
 </table>
