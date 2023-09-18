@@ -19,4 +19,13 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color: #121212;
+}
+
+h1, p {
+    color: white;
+}
+
+label {
+    color: white;
 }
