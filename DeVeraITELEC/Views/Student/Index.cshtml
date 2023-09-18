@@ -12,8 +12,8 @@
             <th>Course</th>
             <th>Admission Date</th>
             <th>Email</th>
-            <th>GPA</th>
             <th>Details</th>
+            <th>Edit</th>
         </tr>
     </thead>
     <tbody>
@@ -24,15 +24,17 @@
                 <td>@student.Course</td>
                 <td>@student.AdmissionDate.ToString("d")</td>
                 <td>@student.Email</td>
-                <td>@student.GPA</td>
                 <td><a asp-action="ShowDetail" asp-route-id="@student.Id">Show Details</a></td>
+                <td><a asp-action="Edit" asp-route-id="@student.Id">Edit Details</a></td>
             </tr>
         }
     </tbody>
 </table>
 
 <div class="text-center">
-    <button class="btn btn-outline-danger btn-lg" onclick="location.href='@Url.Action("Student", "Student")'">
-        Student
-    </button>
+    <a class="btn btn-outline-danger btn-lg" asp-action="Student">Student</a>
+</div>
+<br />
+<div class="text-center">
+    <a class="btn btn-outline-danger btn-lg" asp-action="AddStudent">AddStudent</a>
 </div>

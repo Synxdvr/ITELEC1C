@@ -4,7 +4,7 @@
 <table class="table table-dark table-striped">
     <thead>
         <tr>
-            <th class="text-center" colspan="5">Instructor</th>
+            <th class="text-center" colspan="6">Instructor</th>
         </tr>
         <tr>
             <th>Name</th>
@@ -12,6 +12,7 @@
             <th>Rank</th>
             <th>Hiring Date</th>
             <th>Details</th>
+            <th>Edit</th>
         </tr>
     </thead>
     <tbody>
@@ -23,7 +24,12 @@
                 <td>@instructor.Rank</td>
                 <td>@instructor.HiringDate.ToString("d")</td>
                 <td><a asp-action="ShowDetail" asp-route-id="@instructor.Id">Show Details</a></td>
+                <td><a asp-action="Edit" asp-route-id="@instructor.Id">Edit Details</a></td>
             </tr>
         }
     </tbody>
 </table>
+
+<div class="text-center">
+    <a class="btn btn-outline-danger btn-lg" asp-action="AddInstructor">Add Instructor</a>
+</div>

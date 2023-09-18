@@ -7,7 +7,7 @@
 @{
     string FirstName = "Steve";
     string LastName = "De Vera";
-    DateTime Birthday = DateTime.Parse("01/30/2003");
+    DateTime Birthday = new DateTime(2003, 01, 30);
     int Age = DateTime.Now.Year - Birthday.Year;
     string Email = "steve.devera.cics@ust.edu.ph";
     string Username = Email.Split('@')[0];
