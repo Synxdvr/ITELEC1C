@@ -1,9 +1,10 @@
 ﻿using DeVeraITELEC.Models;
-using System;
+
 namespace DeVeraITELEC.Services
 {
     public interface IMyFakeDataService
     {
-        List<Student> Students { get; }
+        List<Student> StudentList { get; }
+        List<Instructor> Instructors { get; }
     }
 }

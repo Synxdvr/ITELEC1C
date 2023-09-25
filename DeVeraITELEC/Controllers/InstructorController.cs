@@ -1,53 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using DeVeraITELEC.Models;
+using DeVeraITELEC.Services;
+using System.ComponentModel;
 
 
 namespace DeVeraITELEC.Controllers
 {
     public class InstructorController : Controller
     {
-        List<Instructor> Instructors = new List<Instructor>
-            {
-                new Instructor()
-                {
-                    Id= 1,
-                    FirstName = "Gabriel",
-                    LastName = "Montano",
-                    IsTenured = true, 
-                    Rank = Rank.Professor, 
-                    HiringDate = DateTime.Parse("2022-08-26")
-                },
-                new Instructor()
-                {
-                    Id= 2,
-                    FirstName = "Zyx",
-                    LastName = "Montano", 
-                    IsTenured = false, 
-                    Rank = Rank.Instructor, 
-                    HiringDate = DateTime.Parse("2022-08-07")
-                },
-                new Instructor()
-                {
-                    Id= 3,
-                    FirstName = "Aerdriel",
-                    LastName = "Montano", 
-                    IsTenured = true, 
-                    Rank = Rank.Professor, 
-                    HiringDate = DateTime.Parse("2020-01-25")
-                }
+        private readonly IMyFakeDataService _fakeData;
+        public InstructorController(IMyFakeDataService fakeData)
+        {
+            _fakeData = fakeData;
+        }
 
-                
-            };
         public IActionResult Index()
         {
 
-            return View(Instructors);
+            return View(_fakeData.Instructors);
         }
 
         public IActionResult ShowDetail(int id)
         {
             //Search for the student whose id matches the given id
-            Instructor? instructor = Instructors.FirstOrDefault(st => st.Id == id);
+            Instructor? instructor = _fakeData.Instructors.FirstOrDefault(st => st.Id == id);
 
             if (instructor != null)//was an student found?
                 return View(instructor);
@@ -63,15 +39,15 @@ namespace DeVeraITELEC.Controllers
         [HttpPost]
         public IActionResult AddInstructor(Instructor newInstructor)
         {
-            Instructors.Add(newInstructor);
-            return View("Index", Instructors);
+            _fakeData.Instructors.Add(newInstructor);
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
             //Search for the student whose id matches the given id
-            Instructor? instructor = Instructors.FirstOrDefault(st => st.Id == id);
+            Instructor? instructor = _fakeData.Instructors.FirstOrDefault(st => st.Id == id);
 
             if (instructor != null)//was an student found?
                 return View(instructor);
@@ -82,7 +58,7 @@ namespace DeVeraITELEC.Controllers
         [HttpPost]
         public IActionResult Edit(Instructor instructorChange)
         {
-            Instructor? instructor = Instructors.FirstOrDefault(st => st.Id == instructorChange.Id);
+            Instructor? instructor = _fakeData.Instructors.FirstOrDefault(st => st.Id == instructorChange.Id);
 
             if (instructor != null)
             {
@@ -93,13 +69,13 @@ namespace DeVeraITELEC.Controllers
                 instructor.IsTenured = instructorChange.IsTenured;
                 instructor.HiringDate = instructorChange.HiringDate;
             }
-            return View("Index", Instructors);
+            return RedirectToAction("Index");
         }
         [HttpGet]
         public IActionResult Delete(int id)
         {
             //Search for the student whose id matches the given id
-            Instructor? instructor = Instructors.FirstOrDefault(st => st.Id == id);
+            Instructor? instructor = _fakeData.Instructors.FirstOrDefault(st => st.Id == id);
 
             if (instructor != null)//was an student found?
                 return View(instructor);
@@ -109,13 +85,13 @@ namespace DeVeraITELEC.Controllers
         [HttpPost]
         public IActionResult Delete(Instructor removeInstructor)
         {
-            Instructor? instructor = Instructors.FirstOrDefault(st => st.Id == removeInstructor.Id);
+            Instructor? instructor = _fakeData.Instructors.FirstOrDefault(st => st.Id == removeInstructor.Id);
 
             if (instructor != null)
             {
-                Instructors.Remove(instructor);
+                _fakeData.Instructors.Remove(instructor);
             }
-            return View("Index", Instructors);
+            return RedirectToAction("Index");
         }
 
     }
