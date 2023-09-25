@@ -102,6 +102,29 @@ namespace DeVeraITELEC.Controllers
                 return View("Index", StudentList);
             }
 
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            //Search for the student whose id matches the given id
+            Student? student = StudentList.FirstOrDefault(st => st.Id == id);
+
+            if (student != null)//was an student found?
+                return View(student);
+
+            return NotFound();
+        }
+        [HttpPost]
+        public IActionResult Delete(Student removeStudent)
+        {
+            Student? student = StudentList.FirstOrDefault(st => st.Id == removeStudent.Id);
+
+            if (student != null)
+            {
+                StudentList.Remove(student);
+            }
+            return View("Index", StudentList);
+        }
+
     }
 
 }

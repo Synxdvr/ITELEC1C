@@ -10,10 +10,10 @@
         <tr>
             <th>Name</th>
             <th>Course</th>
-            <th>Admission Date</th>
             <th>Email</th>
             <th>Details</th>
             <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -22,19 +22,19 @@
             <tr>
                 <td>@($"{student.FirstName} {student.LastName}")</td>
                 <td>@student.Course</td>
-                <td>@student.AdmissionDate.ToString("d")</td>
                 <td>@student.Email</td>
-                <td><a asp-action="ShowDetail" asp-route-id="@student.Id">Show Details</a></td>
-                <td><a asp-action="Edit" asp-route-id="@student.Id">Edit Details</a></td>
+                <td><a class="btn btn-primary" asp-action="ShowDetail" asp-route-id="@student.Id">Show Details</a></td>
+                <td><a class="btn btn-info" asp-action="Edit" asp-route-id="@student.Id">Edit Details</a></td>
+                <td><a class="btn btn-danger" asp-action="Delete" asp-route-id="@student.Id" >Remove</a></td>
             </tr>
         }
     </tbody>
 </table>
 
 <div class="text-center">
-    <a class="btn btn-outline-danger btn-lg" asp-action="Student">Student</a>
+    <a class="btn btn-outline-danger btn-lg" asp-action="AddStudent">Add Student</a>
 </div>
 <br />
 <div class="text-center">
-    <a class="btn btn-outline-danger btn-lg" asp-action="AddStudent">Add Student</a>
+    <a class="btn btn-outline-danger btn-lg" asp-action="Student">Student</a>
 </div>

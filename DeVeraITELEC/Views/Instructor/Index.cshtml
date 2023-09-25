@@ -10,9 +10,9 @@
             <th>Name</th>
             <th>Status</th>
             <th>Rank</th>
-            <th>Hiring Date</th>
             <th>Details</th>
             <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -22,9 +22,9 @@
                 <td>@($"{instructor.FirstName} {instructor.LastName}")</td>
                 <td>@(instructor.IsTenured ? "Permanent" : "Probationary")</td>
                 <td>@instructor.Rank</td>
-                <td>@instructor.HiringDate.ToString("d")</td>
-                <td><a asp-action="ShowDetail" asp-route-id="@instructor.Id">Show Details</a></td>
-                <td><a asp-action="Edit" asp-route-id="@instructor.Id">Edit Details</a></td>
+                <td><a class="btn btn-primary" asp-action="ShowDetail" asp-route-id="@instructor.Id">Show Details</a></td>
+                <td><a class="btn btn-info" asp-action="Edit" asp-route-id="@instructor.Id">Edit Details</a></td>
+                <td><a class="btn btn-danger" asp-action="Delete" asp-route-id="@instructor.Id">Remove</a></td>
             </tr>
         }
     </tbody>

@@ -95,6 +95,28 @@ namespace DeVeraITELEC.Controllers
             }
             return View("Index", Instructors);
         }
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            //Search for the student whose id matches the given id
+            Instructor? instructor = Instructors.FirstOrDefault(st => st.Id == id);
+
+            if (instructor != null)//was an student found?
+                return View(instructor);
+
+            return NotFound();
+        }
+        [HttpPost]
+        public IActionResult Delete(Instructor removeInstructor)
+        {
+            Instructor? instructor = Instructors.FirstOrDefault(st => st.Id == removeInstructor.Id);
+
+            if (instructor != null)
+            {
+                Instructors.Remove(instructor);
+            }
+            return View("Index", Instructors);
+        }
 
     }
 }
