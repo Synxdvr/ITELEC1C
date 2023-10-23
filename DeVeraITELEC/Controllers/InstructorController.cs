@@ -69,6 +69,7 @@ namespace DeVeraITELEC.Controllers
                 instructor.Rank = instructorChange.Rank;
                 instructor.IsTenured = instructorChange.IsTenured;
                 instructor.HiringDate = instructorChange.HiringDate;
+                _dbContext.SaveChanges();
             }
             return RedirectToAction("Index");
         }

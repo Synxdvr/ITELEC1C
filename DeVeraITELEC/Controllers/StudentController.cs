@@ -70,6 +70,7 @@ namespace DeVeraITELEC.Controllers
                     student.Course = studentChange.Course;
                     student.GPA = studentChange.GPA;
                     student.AdmissionDate = studentChange.AdmissionDate;
+                    _dbContext.SaveChanges();
                 }
                 return RedirectToAction("Index");
             }
