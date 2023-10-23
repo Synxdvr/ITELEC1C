@@ -2,28 +2,28 @@
 using DeVeraITELEC.Models;
 using DeVeraITELEC.Services;
 using System.ComponentModel;
-
+using DeVeraITELEC.Data;
 
 namespace DeVeraITELEC.Controllers
 {
     public class InstructorController : Controller
     {
-        private readonly IMyFakeDataService _fakeData;
-        public InstructorController(IMyFakeDataService fakeData)
+        private readonly AppDbContext _dbContext;
+        public InstructorController(AppDbContext dbContext)
         {
-            _fakeData = fakeData;
+            _dbContext = dbContext;
         }
 
         public IActionResult Index()
         {
 
-            return View(_fakeData.Instructors);
+            return View(_dbContext.Instructors);
         }
 
         public IActionResult ShowDetail(int id)
         {
             //Search for the student whose id matches the given id
-            Instructor? instructor = _fakeData.Instructors.FirstOrDefault(st => st.Id == id);
+            Instructor? instructor = _dbContext.Instructors.FirstOrDefault(st => st.Id == id);
 
             if (instructor != null)//was an student found?
                 return View(instructor);
@@ -39,7 +39,8 @@ namespace DeVeraITELEC.Controllers
         [HttpPost]
         public IActionResult AddInstructor(Instructor newInstructor)
         {
-            _fakeData.Instructors.Add(newInstructor);
+            _dbContext.Instructors.Add(newInstructor);
+            _dbContext.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -47,7 +48,7 @@ namespace DeVeraITELEC.Controllers
         public IActionResult Edit(int id)
         {
             //Search for the student whose id matches the given id
-            Instructor? instructor = _fakeData.Instructors.FirstOrDefault(st => st.Id == id);
+            Instructor? instructor = _dbContext.Instructors.FirstOrDefault(st => st.Id == id);
 
             if (instructor != null)//was an student found?
                 return View(instructor);
@@ -58,7 +59,7 @@ namespace DeVeraITELEC.Controllers
         [HttpPost]
         public IActionResult Edit(Instructor instructorChange)
         {
-            Instructor? instructor = _fakeData.Instructors.FirstOrDefault(st => st.Id == instructorChange.Id);
+            Instructor? instructor = _dbContext.Instructors.FirstOrDefault(st => st.Id == instructorChange.Id);
 
             if (instructor != null)
             {
@@ -75,7 +76,7 @@ namespace DeVeraITELEC.Controllers
         public IActionResult Delete(int id)
         {
             //Search for the student whose id matches the given id
-            Instructor? instructor = _fakeData.Instructors.FirstOrDefault(st => st.Id == id);
+            Instructor? instructor = _dbContext.Instructors.FirstOrDefault(st => st.Id == id);
 
             if (instructor != null)//was an student found?
                 return View(instructor);
@@ -85,13 +86,15 @@ namespace DeVeraITELEC.Controllers
         [HttpPost]
         public IActionResult Delete(Instructor removeInstructor)
         {
-            Instructor? instructor = _fakeData.Instructors.FirstOrDefault(st => st.Id == removeInstructor.Id);
+            Instructor? instructor = _dbContext.Instructors.FirstOrDefault(st => st.Id == removeInstructor.Id);
 
             if (instructor != null)
             {
-                _fakeData.Instructors.Remove(instructor);
+                _dbContext.Instructors.Remove(instructor);
+                _dbContext.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return NotFound();
         }
 
     }
