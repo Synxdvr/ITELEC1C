@@ -46,6 +46,12 @@ namespace DeVeraITELEC.Controllers
             return RedirectToAction("Index", "Instructor");
         }
 
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View("Register");
+        }
+
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel userEnteredData)
         {
