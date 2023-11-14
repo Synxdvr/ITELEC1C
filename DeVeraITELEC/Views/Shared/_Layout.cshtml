@@ -39,16 +39,16 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link " asp-action="Logout" asp-controller="Account">Logout</a>
+                                <a class="nav-link " asp-area="" asp-action="Logout" asp-controller="Account">Logout</a>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link " asp-action="Login" asp-controller="Acoount">Login</a>
+                                <a class="nav-link " asp-area="" asp-action="Login" asp-controller="Account">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " asp-action="Register" asp-controller="Account">Register new Account</a>
+                                <a class="nav-link " asp-area="" asp-action="Register" asp-controller="Account">Register new Account</a>
                             </li>
                         }
                     </ul>

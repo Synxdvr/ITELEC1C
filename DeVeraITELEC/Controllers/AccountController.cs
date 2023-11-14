@@ -19,7 +19,8 @@ namespace DeVeraITELEC.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult login()
+        [HttpGet]
+        public IActionResult Login()
         {
             return View();
         }
@@ -49,7 +50,7 @@ namespace DeVeraITELEC.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            return View("Register");
+            return View();
         }
 
         [HttpPost]
