@@ -24,10 +24,15 @@ namespace DeVeraITELEC.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginInfo)
         {
-            var result = await _signInManager.PasswordSignInAsync(loginInfo.Username, loginInfo.Password, loginInfo.RememberMe, false);
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            var result = await _signInManager.PasswordSignInAsync(loginInfo.UserName, loginInfo.Password, loginInfo.RememberMe, false);
 
             if (result.Succeeded)
             {
@@ -37,14 +42,13 @@ namespace DeVeraITELEC.Controllers
             {
                 ModelState.AddModelError("", "Failed to Login");
             }
-
             return View(loginInfo);
         }
 
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Instructor");
+            return RedirectToAction("Login", "Account");
         }
 
         [HttpGet]
@@ -54,18 +58,18 @@ namespace DeVeraITELEC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel userEnteredData)
+        public virtual async Task<IActionResult> Register(RegisterViewModel userEnteredData)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 User newUser = new User();
                 newUser.UserName = userEnteredData.UserName;
-                newUser.Firstname = userEnteredData.FirstName;
-                newUser.Lastname = userEnteredData.LastName;
+                newUser.FirstName = userEnteredData.FirstName;
+                newUser.LastName = userEnteredData.LastName;
                 newUser.Email = userEnteredData.Email;
                 newUser.PhoneNumber = userEnteredData.Phone;
 
-                var result = await _userManager.CreateAsync(newUser, userEnteredData.Password);
+                var result = await _userManager.CreateAsync(newUser, userEnteredData.ConfirmPassword);
 
                 if (result.Succeeded)
                 {

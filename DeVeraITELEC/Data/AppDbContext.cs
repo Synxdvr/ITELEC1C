@@ -56,7 +56,8 @@ namespace DeVeraITELEC.Data
                     LastName = "Montano",
                     IsTenured = true,
                     Rank = Rank.Instructor,
-                    HiringDate = DateTime.Parse("05/06/2078")
+                    HiringDate = DateTime.Parse("05/06/2078"),
+                    Phone = "09123456789"
                 },
                 new Instructor()
                 {
@@ -65,7 +66,8 @@ namespace DeVeraITELEC.Data
                     LastName = "Durant",
                     IsTenured = false,
                     Rank = Rank.AssistantProfessor,
-                    HiringDate = DateTime.Parse("05/06/2078")
+                    HiringDate = DateTime.Parse("05/06/2078"),
+                    Phone = "09123456789"
                 },
                 new Instructor()
                 {
@@ -74,7 +76,8 @@ namespace DeVeraITELEC.Data
                     LastName = "Lintag",
                     IsTenured = true,
                     Rank = Rank.Professor,
-                    HiringDate = DateTime.Parse("05/06/2078")
+                    HiringDate = DateTime.Parse("05/06/2078"),
+                    Phone = "09123456789"
                 }
             );
         }

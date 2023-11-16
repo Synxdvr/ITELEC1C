@@ -15,21 +15,24 @@ namespace DeVeraITELEC.Models
         [Display(Name = "Comfirm Password")]
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "You must confirm your password")]
-        public string? ConfirmPassword { get; set;}
+        public string? ConfirmPassword { get; set; }
 
         [Display(Name = "First Name")]
-        public string? FirstName {  get; set; }
+        [Required(ErrorMessage = "Firstname is required")]
+        public string? FirstName { get; set; }
 
         [Display(Name = "Last Name")]
+        [Required(ErrorMessage = "Lastname is required")]
         public string? LastName { get; set; }
 
         [Display(Name = "Email Address")]
         [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "Email Address is required")]
-        public string? Email { get; set;}
+        public string? Email { get; set; }
 
-        [RegularExpression("[0-9]{3}[0-9]{3}[0-9]{4}", ErrorMessage = "You must follow the format 000-000-0000")]
+        [RegularExpression("[0-9]{11}", ErrorMessage = "Must be 11 digits")]
         [Display(Name = "Phone Number")]
+        [Required(ErrorMessage = "Phone number is required")]
         public string? Phone { get; set; }
     }
 }

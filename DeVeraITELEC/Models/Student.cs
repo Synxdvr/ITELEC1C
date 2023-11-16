@@ -1,4 +1,6 @@
-﻿namespace DeVeraITELEC.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DeVeraITELEC.Models
 {
     public enum Course
     {
@@ -7,14 +9,30 @@
 
     public class Student
     {
-       
         public int Id { get; set; }
-        public required string FirstName { get; set; }
-        public required string LastName { get; set; }
+
+        [Display(Name = "First Name")]
+        [Required(ErrorMessage = "First name is required")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
+        [Required(ErrorMessage = "Last name is required")]
+        public string LastName { get; set; }
+
+        [Required(ErrorMessage = "GPA is required")]
         public double GPA { get; set; }
+
         public Course Course { get; set; }
+
+        [Display(Name = "Admission Date")]
+        [Required(ErrorMessage = "Admission date is required")]
+        [DataType(DataType.Date)]
         public DateTime AdmissionDate { get; set; }
-        public required string Email { get; set; }
+
+        [Display(Name = "Email Address")]
+        [EmailAddress(ErrorMessage = "Invalid email address")]
+        [Required(ErrorMessage = "Email address is required")]
+        public string Email { get; set; }
 
     }
 }

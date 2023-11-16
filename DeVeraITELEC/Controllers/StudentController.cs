@@ -2,19 +2,22 @@
 using DeVeraITELEC.Models;
 using DeVeraITELEC.Services;
 using DeVeraITELEC.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace DeVeraITELEC.Controllers
 {
     public class StudentController : Controller
     {
         private readonly AppDbContext _dbContext;
+        private DbSet<Student> Students;
         public StudentController(AppDbContext dbContext)
         {
             _dbContext = dbContext;
+            Students = _dbContext.Students;
         }
         public IActionResult Index()
         {
-            return View(_dbContext.Students);
+            return View(Students);
         }
         public IActionResult Student()
         {
@@ -23,7 +26,7 @@ namespace DeVeraITELEC.Controllers
         public IActionResult ShowDetail(int id)
         {
             //Search for the student whose id matches the given id
-            Student? student = _dbContext.Students.FirstOrDefault(st => st.Id == id);
+            Student? student = Students.FirstOrDefault(st => st.Id == id);
             
             if (student != null)//was an student found?
                 return View(student);
@@ -39,7 +42,7 @@ namespace DeVeraITELEC.Controllers
         [HttpPost]
             public IActionResult AddStudent(Student newStudent)
             {
-                _dbContext.Students.Add(newStudent);
+                Students.Add(newStudent);
                 _dbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -48,7 +51,7 @@ namespace DeVeraITELEC.Controllers
             public IActionResult Edit(int id) 
             {
                 //Search for the student whose id matches the given id
-                Student? student = _dbContext.Students.FirstOrDefault(st => st.Id == id);
+                Student? student = Students.FirstOrDefault(st => st.Id == id);
 
                 if (student != null)//was an student found?
                     return View(student);
@@ -59,19 +62,18 @@ namespace DeVeraITELEC.Controllers
         [HttpPost]
             public IActionResult Edit(Student studentChange)
             {
-                Student? student = _dbContext.Students.FirstOrDefault(st => st.Id == studentChange.Id);
+                Student? student = Students.FirstOrDefault(st => st.Id == studentChange.Id);
 
                 if (student != null)
                 {
-                    student.Id = studentChange.Id;
                     student.FirstName = studentChange.FirstName;
                     student.LastName = studentChange.LastName;
                     student.Email = studentChange.Email;
                     student.Course = studentChange.Course;
                     student.GPA = studentChange.GPA;
                     student.AdmissionDate = studentChange.AdmissionDate;
-                    _dbContext.SaveChanges();
                 }
+                _dbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -79,7 +81,7 @@ namespace DeVeraITELEC.Controllers
         public IActionResult Delete(int id)
         {
             //Search for the student whose id matches the given id
-            Student? student = _dbContext.Students.FirstOrDefault(st => st.Id == id);
+            Student? student = Students.FirstOrDefault(st => st.Id == id);
 
             if (student != null)//was an student found?
                 return View(student);
@@ -89,11 +91,11 @@ namespace DeVeraITELEC.Controllers
         [HttpPost]
         public IActionResult Delete(Student removeStudent)
         {
-            Student? student = _dbContext.Students.FirstOrDefault(st => st.Id == removeStudent.Id);
+            Student? student = Students.FirstOrDefault(st => st.Id == removeStudent.Id);
 
             if (student != null)
             {
-                _dbContext.Students.Remove(student);
+                Students.Remove(student);
                 _dbContext.SaveChanges();
                 return RedirectToAction("Index");
             }

@@ -1,29 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using DeVeraITELEC.Models;
-using DeVeraITELEC.Services;
-using System.ComponentModel;
 using DeVeraITELEC.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace DeVeraITELEC.Controllers
 {
     public class InstructorController : Controller
     {
         private readonly AppDbContext _dbContext;
+        private DbSet<Instructor> Instructors;
+
         public InstructorController(AppDbContext dbContext)
         {
             _dbContext = dbContext;
+            Instructors = _dbContext.Instructors;
         }
 
         public IActionResult Index()
         {
 
-            return View(_dbContext.Instructors);
+            return View(Instructors);
         }
 
         public IActionResult ShowDetail(int id)
         {
             //Search for the student whose id matches the given id
-            Instructor? instructor = _dbContext.Instructors.FirstOrDefault(st => st.Id == id);
+            Instructor? instructor = Instructors.FirstOrDefault(st => st.Id == id);
 
             if (instructor != null)//was an student found?
                 return View(instructor);
@@ -39,7 +41,7 @@ namespace DeVeraITELEC.Controllers
         [HttpPost]
         public IActionResult AddInstructor(Instructor newInstructor)
         {
-            _dbContext.Instructors.Add(newInstructor);
+            Instructors.Add(newInstructor);
             _dbContext.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -48,7 +50,7 @@ namespace DeVeraITELEC.Controllers
         public IActionResult Edit(int id)
         {
             //Search for the student whose id matches the given id
-            Instructor? instructor = _dbContext.Instructors.FirstOrDefault(st => st.Id == id);
+            Instructor? instructor = Instructors.FirstOrDefault(st => st.Id == id);
 
             if (instructor != null)//was an student found?
                 return View(instructor);
@@ -59,25 +61,24 @@ namespace DeVeraITELEC.Controllers
         [HttpPost]
         public IActionResult Edit(Instructor instructorChange)
         {
-            Instructor? instructor = _dbContext.Instructors.FirstOrDefault(st => st.Id == instructorChange.Id);
+            Instructor? instructor = Instructors.FirstOrDefault(st => st.Id == instructorChange.Id);
 
             if (instructor != null)
             {
-                instructor.Id = instructorChange.Id;
                 instructor.FirstName = instructorChange.FirstName;
                 instructor.LastName = instructorChange.LastName;
                 instructor.Rank = instructorChange.Rank;
                 instructor.IsTenured = instructorChange.IsTenured;
                 instructor.HiringDate = instructorChange.HiringDate;
-                _dbContext.SaveChanges();
             }
+            _dbContext.SaveChanges();
             return RedirectToAction("Index");
         }
         [HttpGet]
         public IActionResult Delete(int id)
         {
             //Search for the student whose id matches the given id
-            Instructor? instructor = _dbContext.Instructors.FirstOrDefault(st => st.Id == id);
+            Instructor? instructor = Instructors.FirstOrDefault(st => st.Id == id);
 
             if (instructor != null)//was an student found?
                 return View(instructor);
@@ -87,11 +88,11 @@ namespace DeVeraITELEC.Controllers
         [HttpPost]
         public IActionResult Delete(Instructor removeInstructor)
         {
-            Instructor? instructor = _dbContext.Instructors.FirstOrDefault(st => st.Id == removeInstructor.Id);
+            Instructor? instructor = Instructors.FirstOrDefault(st => st.Id == removeInstructor.Id);
 
             if (instructor != null)
             {
-                _dbContext.Instructors.Remove(instructor);
+                Instructors.Remove(instructor);
                 _dbContext.SaveChanges();
                 return RedirectToAction("Index");
             }

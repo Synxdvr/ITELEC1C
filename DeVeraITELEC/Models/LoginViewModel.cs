@@ -6,7 +6,7 @@ namespace DeVeraITELEC.Models
     {
         [Display(Name = "Username")]
         [Required(ErrorMessage = "Username is required")]
-        public string? Username { get; set; }
+        public string? UserName { get; set; }
 
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Password is required")]
